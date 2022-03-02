@@ -123,7 +123,11 @@ public class MSButton
         else if(mines.contains(this))
           displayLosingMessage();
         else if(countMines(NUM_ROWS, NUM_COLS) > 0)
-          setLabel(countMines(NUM_ROWS, NUM_COLS));
+          setLabel(countMines(NUM_ROWS, NUM_COLS));\
+            //call for valid unclicked neighboring buttons
+        /*if(isValid(r, c-1) == true && blobs[r][c-1].isMarked() == true)
+      blobs[r][c-1].mousePressed();
+      */
         mousePressed();
           
           
