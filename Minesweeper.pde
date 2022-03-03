@@ -24,6 +24,7 @@ void setup ()
     }
     
     setMines();
+    setMines();
 }
 public void setMines() //STEP NINE
 {
@@ -33,7 +34,7 @@ public void setMines() //STEP NINE
     if(!mines.contains(buttons[row][col])){ //if mines doesn't contain random row+col, add it
       mines.add(buttons[row][col]);
     }
-    
+    //System.out.println(mines);
 }
 
 public void draw ()
@@ -66,6 +67,12 @@ public boolean isValid(int r, int c)
 public int countMines(int row, int col)
 {
     int numMines = 0;
+    /*
+    for(int r = row-1; r<=row+1; r++){
+      for(int c = col-1; c<=col+1; c++){
+        if(isValid(row, col)
+        */
+    
     //your code here - count bombs in 8 neighbors, but 1st check if neighboring button
     //is valid before checking to see if it's a mine
     if(isValid(row-1, col-1) == true && mines.contains(buttons[row-1][col-1]))
@@ -84,6 +91,7 @@ public int countMines(int row, int col)
       numMines ++;
     if(isValid(row+1, col+1) == true && mines.contains(buttons[row][col+1]))
       numMines ++;
+      
      
      
     //System.out.println(numMines);
@@ -115,20 +123,29 @@ public class MSButton
         clicked = true;
         //your code here
         if(mouseButton == RIGHT){
-          if(flagged == true)
+          if(flagged == true){
             flagged = false;
-          flagged = false;
-          clicked = flagged;
+            clicked = false;
+          }
+          else{
+          flagged = true;
+          }
         }
         else if(mines.contains(this))
           displayLosingMessage();
-        else if(countMines(NUM_ROWS, NUM_COLS) > 0)
-          setLabel(countMines(NUM_ROWS, NUM_COLS));\
-            //call for valid unclicked neighboring buttons
+        else if(countMines(myRow, myCol) > 0)  
+          setLabel(countMines(myRow, myCol));
+        //call for valid and unflagged neighboring buttons
         /*if(isValid(r, c-1) == true && blobs[r][c-1].isMarked() == true)
       blobs[r][c-1].mousePressed();
       */
-        mousePressed();
+        else{
+          if(isValid(myRow, myCol-1) == true && buttons[myRow][myCol-1].isFlagged() == true)
+            buttons[myRow][myCol-1].mousePressed();
+           
+         // mousePressed();
+        
+        }
           
           
         
@@ -138,7 +155,7 @@ public class MSButton
         if (flagged)
             fill(0);
         else if( clicked && mines.contains(this) ) 
-        fill(255,0,0);
+          fill(255,0,0);
         else if(clicked)
             fill( 200 );
         else 
