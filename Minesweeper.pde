@@ -29,8 +29,8 @@ void setup ()
 public void setMines() //STEP NINE
 {
     //your code
-    int row = (int)(Math.random()*NUM_ROWS)+1;
-    int col = (int)(Math.random()*NUM_COLS)+1;
+    int row = (int)(Math.random()*NUM_ROWS);
+    int col = (int)(Math.random()*NUM_COLS);
     if(!mines.contains(buttons[row][col])){ //if mines doesn't contain random row+col, add it
       mines.add(buttons[row][col]);
     }
@@ -75,22 +75,23 @@ public int countMines(int row, int col)
     
     //your code here - count bombs in 8 neighbors, but 1st check if neighboring button
     //is valid before checking to see if it's a mine
-    if(isValid(row-1, col-1) == true && mines.contains(buttons[row-1][col-1]))
+        if(isValid(row-1, col-1) == true && mines.contains(buttons[row-1][col-1]))
       numMines ++;
     if(isValid(row-1, col) == true && mines.contains(buttons[row-1][col]))
       numMines ++;
     if(isValid(row-1, col+1) == true && mines.contains(buttons[row-1][col+1]))
       numMines ++;
-    if(isValid(row, col-1) == true && mines.contains(buttons[row-1][col-1]))
+    if(isValid(row, col-1) == true && mines.contains(buttons[row][col-1]))
       numMines ++;
-    if(isValid(row, col+1) == true && mines.contains(buttons[row-1][col+1]))
+    if(isValid(row, col+1) == true && mines.contains(buttons[row][col+1]))
       numMines ++;
     if(isValid(row+1, col-1) == true && mines.contains(buttons[row+1][col-1]))
       numMines ++;
     if(isValid(row+1, col) == true && mines.contains(buttons[row+1][col]))
       numMines ++;
-    if(isValid(row+1, col+1) == true && mines.contains(buttons[row][col+1]))
+    if(isValid(row+1, col+1) == true && mines.contains(buttons[row+1][col+1]))
       numMines ++;
+
       
      
      
