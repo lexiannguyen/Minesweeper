@@ -22,8 +22,8 @@ void setup ()
       }
     }
     
-    setMines();
-    setMines();
+    for(int i = 0; i<NUM_COLS/2; i++)
+      setMines();
 }
 public void setMines() //STEP NINE
 {
@@ -59,19 +59,29 @@ public boolean isWon()
 }
 public void displayLosingMessage()
 {
-    textSize(7*NUM_ROWS);
+    //your code here
+    
+    textSize(100/NUM_ROWS);
+    if(mines.contains(this))
+      fill(255);
+     /*
+    for(int i = 0; i<numOfMines; i++){
+      mines.get(i).fill(255); 
+    }
+    */
     
     for(int r = 0; r<NUM_ROWS; r++){
       for(int c = 0; c<NUM_COLS; c++){
         buttons[r][c].setLabel("lose");
       }
     }
+    //display positions of bombs
 }
 public void displayWinningMessage()
 {
     //your code here
     //text that says you won
-    textSize(7*NUM_ROWS);
+    textSize(100/NUM_ROWS);
     
     for(int r = 0; r<NUM_ROWS; r++){
       for(int c = 0; c<NUM_COLS; c++){
@@ -147,27 +157,31 @@ public class MSButton
           }
           else{
           flagged = true;
+          //setLabel(".");
+          fill(myColors[1]);
           }
         }
-        else if(mines.contains(this))
+        else if(mines.contains(this)){
           displayLosingMessage();
+          fill(#e7b3ff);  //color for unclicked mines
+          
+        }
         else if(countMines(myRow, myCol) > 0)  
           setLabel(countMines(myRow, myCol));
 
         else{
           if(isValid(myRow, myCol-1) == true && buttons[myRow][myCol-1].isFlagged() == true)
             buttons[myRow][myCol-1].mousePressed();
-
         
         }
-          
-          
         
     }
     public void draw () 
     {    
-        if (flagged)
-            fill(0);
+        if (flagged){
+            fill(#ffbad1);
+            setLabel("F");
+        }
         else if( clicked && mines.contains(this) ) 
           fill(255,0,0);
         else if(clicked)
