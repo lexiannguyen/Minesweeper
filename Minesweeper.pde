@@ -59,15 +59,20 @@ public boolean isWon()
 }
 public void displayLosingMessage()
 {
-    //your code here
-    System.out.println("you lost");
+    textSize(7*NUM_ROWS);
+    
+    for(int r = 0; r<NUM_ROWS; r++){
+      for(int c = 0; c<NUM_COLS; c++){
+        buttons[r][c].setLabel("lose");
+      }
+    }
 }
 public void displayWinningMessage()
 {
     //your code here
     //text that says you won
-    textSize(15*NUM_ROWS);
-    text("you won!", 40, 240);
+    textSize(7*NUM_ROWS);
+    
     for(int r = 0; r<NUM_ROWS; r++){
       for(int c = 0; c<NUM_COLS; c++){
         buttons[r][c].setLabel("win");
